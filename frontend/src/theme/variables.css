@@ -1,0 +1,130 @@
+/* DevDash design tokens (PRD §8.3) dipetakan ke variabel Ionic. Light = default (revisi: sebelumnya dark). */
+
+:root,
+body.light,
+body.system {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #eef0f4;
+  --border: #dde1e8;
+  --text: #14171f;
+  --text-muted: #5b6475;
+  --primary: #3d5afe;
+  --success: #12a150;
+  --warning: #b7791f;
+  --danger: #d93636;
+
+  --ion-background-color: var(--bg);
+  --ion-text-color: var(--text);
+  --ion-color-primary: var(--primary);
+  --ion-color-success: var(--success);
+  --ion-color-warning: var(--warning);
+  --ion-color-danger: var(--danger);
+  --ion-item-background: var(--surface);
+  --ion-card-background: var(--surface);
+  --ion-toolbar-background: var(--surface);
+  --ion-border-color: var(--border);
+  color-scheme: light;
+}
+
+body.dark {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-2: #1f2430;
+  --border: #2a3040;
+  --text: #e6e8ee;
+  --text-muted: #8b93a7;
+  --primary: #6c8cff;
+  --success: #3dd68c;
+  --warning: #f5b544;
+  --danger: #ff6b6b;
+
+  --ion-background-color: var(--bg);
+  --ion-text-color: var(--text);
+  --ion-item-background: var(--surface);
+  --ion-card-background: var(--surface);
+  --ion-toolbar-background: var(--surface);
+  color-scheme: dark;
+}
+
+/* Native-feel (PRD §9) */
+html,
+body {
+  overscroll-behavior: none;
+  background: var(--bg);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+ion-content::part(scroll) {
+  min-height: 100dvh;
+}
+ion-button,
+ion-chip,
+ion-item {
+  -webkit-tap-highlight-color: transparent;
+}
+ion-button {
+  min-height: 44px;
+}
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.muted {
+  color: var(--text-muted);
+}
+/* Subjudul tanggal di halaman Hari ini: kecil dan rapat (revisi UI) */
+.judul-tanggal {
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+/* Teks bantuan singkat: kecil */
+.hint {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+/* Konten jangan tertutup tab bar bawah (terutama HP tombol navigasi gestur).
+   !important: menimpa shorthand padding Ionic pada part yang sama.
+   Catatan: di Ionic React, halaman berupa div.ion-page (bukan elemen ion-page). */
+.ion-page ion-content::part(scroll) {
+  padding-bottom: calc(120px + env(safe-area-inset-bottom)) !important;
+}
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+}
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Animasi halus: kartu muncul dengan fade+naik (Fase 5) */
+ion-card {
+  animation: kartu-masuk 0.25s ease-out;
+}
+@keyframes kartu-masuk {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ion-card {
+    animation: none;
+  }
+}
+
+/* Aksesibilitas: indikator fokus keyboard yang jelas (Fase 5) */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

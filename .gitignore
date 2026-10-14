@@ -1,0 +1,12 @@
+# Jaring pengaman tingkat root (aturan detail ada di backend/.gitignore dan frontend/.gitignore)
+backend/.venv/
+backend/.env
+backend/instance/
+backend/__pycache__/
+frontend/node_modules/
+frontend/dist/
+.pytest_cache/
+.DS_Store
+*.log
+.vscode/
+.idea/

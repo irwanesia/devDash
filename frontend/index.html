@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#F6F7F9" />
+    <meta name="description" content="DevDash — dashboard pribadi developer. Proyek, checklist harian, tagihan, dan jadwal belajar. Offline-first." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="DevDash" />
+    <title>DevDash — Dashboard Developer</title>
+    <style>
+      #boot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100dvh;
+        gap: 12px;
+        font-family: system-ui, sans-serif;
+        background: #f6f7f9;
+        color: #14171f;
+        text-align: center;
+        padding: 24px;
+      }
+      #boot .logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: #3d5afe;
+        color: #fff;
+        font-size: 36px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #boot-error {
+        display: none;
+        max-width: 420px;
+        font-size: 13px;
+        color: #d93636;
+        word-break: break-word;
+      }
+    </style>
+    <script>
+      // Penangkap error boot: tampilkan pesan agar tidak blank putih misterius
+      window.__bootError = function (msg) {
+        var el = document.getElementById('boot-error');
+        var spin = document.getElementById('boot-loading');
+        if (el) {
+          el.style.display = 'block';
+          el.textContent = 'Gagal memuat: ' + msg;
+        }
+        if (spin) spin.textContent = 'Coba muat ulang halaman ini.';
+      };
+      window.addEventListener('error', function (e) {
+        if (document.getElementById('root') && document.getElementById('root').childElementCount === 0) {
+          window.__bootError((e && e.message) || 'skrip gagal dijalankan');
+        }
+      });
+      window.addEventListener('unhandledrejection', function (e) {
+        if (document.getElementById('root') && document.getElementById('root').childElementCount === 0) {
+          var m = (e && e.reason && (e.reason.message || e.reason)) || 'galat tak dikenal';
+          window.__bootError(String(m));
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="boot">
+      <div class="logo">D</div>
+      <div id="boot-loading">Memuat DevDash…</div>
+      <div id="boot-error"></div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
